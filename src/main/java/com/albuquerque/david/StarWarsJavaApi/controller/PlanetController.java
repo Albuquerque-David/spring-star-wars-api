@@ -1,10 +1,9 @@
 package com.albuquerque.david.StarWarsJavaApi.controller;
 
 import com.albuquerque.david.StarWarsJavaApi.data.model.Planet;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 public class PlanetController {
 
     private final String PlanetEndpoint = "/planet";
@@ -14,6 +13,9 @@ public class PlanetController {
 
     @GetMapping(PlanetEndpoint)
     public void readPlanet(@RequestParam(required = false) Long id){};
+
+    @GetMapping(PlanetEndpoint)
+    public void readPlanet(@RequestParam(required = false) String name){};
 
     @PutMapping(PlanetEndpoint)
     public void updatePlanet(@RequestBody Planet planet, @RequestParam(required = true) Long id){};

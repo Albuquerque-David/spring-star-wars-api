@@ -11,10 +11,10 @@ import java.util.List;
 @Service
 public class PlanetService {
 
-    private PlanetDAO dao;
+    private PlanetRepository repository;
 
-    public PlanetService(PlanetDAO dao){
-        this.dao = dao;
+    public PlanetService(PlanetRepository repository){
+        this.repository = repository;
     }
 
     /**
