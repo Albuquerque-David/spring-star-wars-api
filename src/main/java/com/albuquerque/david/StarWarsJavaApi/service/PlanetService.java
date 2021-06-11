@@ -1,6 +1,5 @@
 package com.albuquerque.david.StarWarsJavaApi.service;
 
-import com.albuquerque.david.StarWarsJavaApi.dao.PlanetDAO;
 import com.albuquerque.david.StarWarsJavaApi.data.model.Planet;
 import com.albuquerque.david.StarWarsJavaApi.repository.PlanetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
