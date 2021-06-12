@@ -1,26 +1,73 @@
 package com.albuquerque.david.StarWarsJavaApi.controller;
 
 import com.albuquerque.david.StarWarsJavaApi.data.model.Planet;
+import com.albuquerque.david.StarWarsJavaApi.exception.PlanetIdNotUpdatableException;
+import com.albuquerque.david.StarWarsJavaApi.service.PlanetService;
+import io.swagger.annotations.ApiModel;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
+@ApiModel("Planet")
+@RequestMapping("/api/v1/planet")
 public class PlanetController {
 
-    private final String PlanetEndpoint = "/planet";
+    private PlanetService service;
 
-    @PostMapping(PlanetEndpoint)
-    public void createPlanet(@RequestBody Planet planet){};
+    public PlanetController(PlanetService service){
+        this.service = service;
+    }
 
-    @GetMapping(PlanetEndpoint)
-    public void readPlanet(@RequestParam(required = false) Long id){};
+    @PostMapping
+    public ResponseEntity createPlanet(@RequestBody Planet planet){
 
-    @GetMapping(PlanetEndpoint)
-    public void readPlanet(@RequestParam(required = false) String name){};
+        Planet response = service.createPlanet(planet);
+        return new ResponseEntity(response,HttpStatus.CREATED);
 
-    @PutMapping(PlanetEndpoint)
-    public void updatePlanet(@RequestBody Planet planet, @RequestParam(required = true) Long id){};
+    };
 
-    @DeleteMapping(PlanetEndpoint)
-    public void deletePlanet(@RequestParam(required = true) Long id){};
+    @GetMapping
+    public ResponseEntity readAllPlanets(@RequestParam(value = "name", required = false) String name){
+
+        if(name != null)
+            return new ResponseEntity(service.readPlanet(name),HttpStatus.OK);
+
+        List<Planet> response = service.readAllPlanets();
+        return new ResponseEntity(response, HttpStatus.OK);
+
+    };
+
+    @GetMapping("/{id}")
+    public ResponseEntity readPlanet(@PathVariable(value = "id") Long id){
+
+        Planet response = service.readPlanet(id);
+        return new ResponseEntity(response, HttpStatus.OK);
+
+    };
+
+    @PutMapping("/{id}")
+    public ResponseEntity updatePlanet(@RequestBody Planet planet, @PathVariable("id") Long id){
+
+        if(planet.getId() == null)
+            planet.setId(id.toString());
+
+        if(!planet.getId().equals(id.toString()))
+            throw new PlanetIdNotUpdatableException("Cannot change the Planet ID.");
+
+        Planet response = service.updatePlanet(planet);
+        return new ResponseEntity(response,HttpStatus.OK);
+
+    };
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletePlanet(@PathVariable("id") Long id){
+
+        service.deletePlanet(id);
+        return new ResponseEntity(HttpStatus.OK);
+
+    };
 
 }
