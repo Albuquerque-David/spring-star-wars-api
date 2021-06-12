@@ -1,16 +1,18 @@
 package com.albuquerque.david.StarWarsJavaApi.data.model;
 
 import com.mongodb.lang.NonNull;
+import com.mongodb.lang.Nullable;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
 @Document(collection = "planets")
 public class Planet {
 
-    @MongoId
+    @MongoId(FieldType.IMPLICIT)
     @NonNull
-    private Long id;
+    private String id;
 
     @Field
     @NonNull
@@ -24,11 +26,18 @@ public class Planet {
     @NonNull
     private String terrain;
 
-    public Long getId() {
+    public Planet(@NonNull String id, @NonNull String name, @NonNull String climate, @NonNull String terrain) {
+        this.id = id;
+        this.name = name;
+        this.climate = climate;
+        this.terrain = terrain;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -72,5 +81,15 @@ public class Planet {
     @Override
     public int hashCode() {
         return id.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "Planet{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", climate='" + climate + '\'' +
+                ", terrain='" + terrain + '\'' +
+                '}';
     }
 }
