@@ -4,9 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class PlanetMissingDataException extends RuntimeException {
+public class PlanetExistsWithIdException extends RuntimeException {
 
-    public PlanetMissingDataException(String exception){
+    public PlanetExistsWithIdException(String exception){
         super(exception);
     }
 
