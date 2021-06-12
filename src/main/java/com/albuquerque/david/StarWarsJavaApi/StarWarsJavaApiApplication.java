@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-@EnableMongoRepositories(basePackages = "com.albuquerque.david.StarWarsJavaApi.repository")
+@EnableMongoRepositories(basePackages = "com.albuquerque.david.StarWarsJavaApi")
 @SpringBootApplication
 public class StarWarsJavaApiApplication {
 
