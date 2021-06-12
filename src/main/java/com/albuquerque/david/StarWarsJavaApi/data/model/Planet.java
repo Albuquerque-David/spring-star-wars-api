@@ -1,11 +1,16 @@
 package com.albuquerque.david.StarWarsJavaApi.data.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mongodb.lang.NonNull;
 import com.mongodb.lang.Nullable;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.data.mongodb.core.mapping.MongoId;
+import springfox.documentation.annotations.ApiIgnore;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Document(collection = "planets")
 public class Planet {
@@ -26,18 +31,24 @@ public class Planet {
     @NonNull
     private String terrain;
 
+    @JsonIgnore
+    @Nullable
+    private List<String> films;
+
     public Planet(@NonNull String id, @NonNull String name, @NonNull String climate, @NonNull String terrain) {
         this.id = id;
         this.name = name;
         this.climate = climate;
         this.terrain = terrain;
+        this.films = new ArrayList<>();
     }
 
+    @NonNull
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 
@@ -68,6 +79,14 @@ public class Planet {
         this.terrain = terrain;
     }
 
+    public List<String> getFilms() {
+        return films;
+    }
+
+    public void setFilms(List<String> films) {
+        this.films = films;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -86,10 +105,11 @@ public class Planet {
     @Override
     public String toString() {
         return "Planet{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", climate='" + climate + '\'' +
                 ", terrain='" + terrain + '\'' +
+                ", films='" + films + '\'' +
                 '}';
     }
 }

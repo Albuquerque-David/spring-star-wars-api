@@ -1,9 +1,12 @@
 package com.albuquerque.david.StarWarsJavaApi.service;
 
+import com.albuquerque.david.StarWarsJavaApi.data.dto.PlanetDTO;
 import com.albuquerque.david.StarWarsJavaApi.data.model.Planet;
 import com.albuquerque.david.StarWarsJavaApi.exception.PlanetExistsWithIdException;
 import com.albuquerque.david.StarWarsJavaApi.exception.PlanetNotFoundException;
 import com.albuquerque.david.StarWarsJavaApi.repository.PlanetRepository;
+import com.albuquerque.david.StarWarsJavaApi.utils.SWApiUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +15,9 @@ import java.util.Optional;
 
 @Service("com.albuquerque.david.StarWarsJavaApi.service.PlanetService")
 public class PlanetService {
+
+    @Autowired
+    private SWApiUtils swApiUtils;
 
     private PlanetRepository repository;
 
@@ -30,8 +36,15 @@ public class PlanetService {
      */
     public Planet createPlanet(Planet planet){
 
+        Planet planetFromApi;
+
         if(repository.existsById(planet.getId()))
             throw new PlanetExistsWithIdException("Already exists a Planet with ID " + planet.getId() + ".");
+
+        planetFromApi = swApiUtils.findPlanetById(planet.getId());
+
+        if(planetFromApi != null)
+            planet.setFilms(planetFromApi.getFilms());
 
         Planet response = repository.save(planet);
         return response;
