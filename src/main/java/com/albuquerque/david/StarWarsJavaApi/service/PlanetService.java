@@ -79,7 +79,8 @@ public class PlanetService {
      */
     public Planet readPlanet(String name) throws PlanetNotFoundException {
 
-        Optional<Planet> response = repository.findOne(Example.of(new Planet(null,name,null,null)));
+
+        Optional<Planet> response = repository.findByName(name);
 
         if(response.isEmpty())
             throw new PlanetNotFoundException("Planet with name " + name + " not found.");
