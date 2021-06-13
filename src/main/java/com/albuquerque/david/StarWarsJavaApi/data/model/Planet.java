@@ -1,13 +1,12 @@
 package com.albuquerque.david.StarWarsJavaApi.data.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mongodb.lang.NonNull;
 import com.mongodb.lang.Nullable;
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.data.mongodb.core.mapping.MongoId;
-import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +30,7 @@ public class Planet {
     @NonNull
     private String terrain;
 
-    @JsonIgnore
+    @ApiModelProperty(hidden = true)
     @Nullable
     private List<String> films;
 
