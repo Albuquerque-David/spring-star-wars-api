@@ -1,27 +1,16 @@
-version: "3.8"
+version: "3.3"
 
-networks:
-  backend:
-    external: false
-    name: backend
 services:
   starwarsapidb:
-    networks:
-      - backend
     image: mongo:latest
     restart: always
     container_name: starwarsapidb
     ports:
       - 27017:27017
   star-wars-api-image:
-    networks:
-      - backend
     image: star-wars-api-image
     container_name: star-wars-api-image
     restart: always
-    environment:
-      TZ: America/Sao_Paulo
-      SPRING_BOOT_ENVIRONMENT: Production
     ports:
       - 8080:8080
     links:
