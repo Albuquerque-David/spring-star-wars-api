@@ -1,4 +1,4 @@
-package com.albuquerque.david.StarWarsJavaApi;
+/*package com.albuquerque.david.StarWarsJavaApi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -7,10 +7,10 @@ import org.springframework.web.client.RestTemplate;
 
 @EnableMongoRepositories(basePackages = "com.albuquerque.david.StarWarsJavaApi")
 @SpringBootTest(classes = {RestTemplate.class})
-class StarWarsJavaApiApplicationTests {
+public class StarWarsJavaApiApplicationTests {
 
 	@Test
 	void contextLoads() {
 	}
 
-}
+}*/

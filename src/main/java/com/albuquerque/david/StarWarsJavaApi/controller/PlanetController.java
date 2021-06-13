@@ -17,7 +17,7 @@ import java.util.List;
 @ApiModel("Planet")
 @RequestMapping("/api/v1/planet")
 public class PlanetController {
-    
+
     private final String swapiUri = "https://swapi.dev/api/";
 
     private PlanetService service;

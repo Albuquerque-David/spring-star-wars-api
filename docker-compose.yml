@@ -4,13 +4,14 @@ networks:
   backend:
     external: false
     name: backend
+    driver: bridge
 services:
   starwarsapidb:
     networks:
       - backend
     image: mongo:latest
     restart: always
-    container_name: starwarsapidb
+    container_name: star-wars-api-db
     ports:
       - 27017:27017
   star-wars-api-image:
@@ -25,4 +26,4 @@ services:
     ports:
       - 8080:8080
     links:
-      - starwarsapidb
+      - star-wars-api-db
