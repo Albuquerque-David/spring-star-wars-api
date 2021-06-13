@@ -1,8 +1,8 @@
 FROM openjdk:11-jre-slim
-MAINTAINER "Docker App <docker@app.com>"
+MAINTAINER "David Albuquerque <davidra_rj@hotmail.com>"
 WORKDIR /app
 
 COPY ./target/*.jar ./app.jar
-ENTRYPOINT ["java", "-jar", "/app/StarWarsJavaApi-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
 
 EXPOSE 8080
