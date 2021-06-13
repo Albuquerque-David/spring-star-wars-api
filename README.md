@@ -1,7 +1,6 @@
 # spring-star-wars-api
 
 ![alt text](star_wars_logo.png)
-<img src="spring.png" style="width:300px">
 
 ## Sobre
 
